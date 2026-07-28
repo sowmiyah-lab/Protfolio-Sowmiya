@@ -500,7 +500,7 @@ section { padding: 6rem 4rem; position: relative; transition: background 0.35s; 
   display: flex; align-items: center; gap: 1rem;
   background: rgba(29,158,117,0.07);
   border: 1px solid var(--border-medium);
-  border-radius: 0.75rem; padding: 1rem 1.25rem; margin-bottom: 1.5rem;
+  border-radius: 0.75rem; padding: 1rem 1.25rem; margin-bottom: 1rem;
 }
 .cert-icon {
   width: 44px; height: 44px; border-radius: 0.5rem;
@@ -648,9 +648,54 @@ section { padding: 6rem 4rem; position: relative; transition: background 0.35s; 
 }
 
 /* ============================================================
+   PROJECTS
+   ============================================================ */
+#projects { background: var(--section-alt-bg); }
+.projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.75rem; }
+.project-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-soft);
+  border-radius: 1.1rem; padding: 2rem;
+  box-shadow: var(--shadow-card);
+  transition: border-color 0.25s, transform 0.2s, box-shadow 0.25s;
+  position: relative; overflow: hidden;
+}
+.project-card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--card-top-line), transparent);
+  opacity: 0; transition: opacity 0.3s;
+}
+.project-card:hover { border-color: var(--card-hover-border); transform: translateY(-4px); box-shadow: 0 8px 28px rgba(29,158,117,0.12); }
+.project-card:hover::before { opacity: 1; }
+.project-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.35rem; }
+.project-period {
+  display: inline-block;
+  font-family: 'DM Mono', monospace; font-size: 0.7rem;
+  color: var(--teal-600); background: rgba(29,158,117,0.09);
+  border: 1px solid var(--border-medium);
+  padding: 0.2rem 0.65rem; border-radius: 2rem; margin-bottom: 1rem;
+}
+[data-theme="dark"] .project-period { color: var(--teal-200); }
+.project-stack {
+  display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.1rem;
+}
+.project-list { list-style: none; }
+.project-list li {
+  position: relative; padding-left: 1.25rem;
+  color: var(--text-secondary); font-size: 0.92rem;
+  font-weight: 300; line-height: 1.7; margin-bottom: 0.55rem;
+}
+.project-list li::before {
+  content: ''; position: absolute; left: 0; top: 0.6em;
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--teal-400);
+}
+
+/* ============================================================
    TECH CLOUD
    ============================================================ */
-#tech { background: var(--section-alt-bg); padding: 5rem 4rem; }
+#tech { background: var(--bg-page); padding: 5rem 4rem; }
 .tech-cloud { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 3rem; }
 .tech-pill {
   display: flex; align-items: center; gap: 0.4rem;
@@ -667,7 +712,7 @@ section { padding: 6rem 4rem; position: relative; transition: background 0.35s; 
 /* ============================================================
    CONTACT
    ============================================================ */
-#contact { background: var(--bg-page); text-align: center; padding: 7rem 4rem; }
+#contact { background: var(--section-alt-bg); text-align: center; padding: 7rem 4rem; }
 .contact-card {
   max-width: 640px; margin: 3rem auto 0;
   background: var(--contact-card-bg);
@@ -754,6 +799,7 @@ footer {
   .hero { padding-top: 7rem; }
   .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
   .skills-grid { grid-template-columns: 1fr 1fr; }
+  .projects-grid { grid-template-columns: 1fr; }
   .impact-grid { grid-template-columns: 1fr 1fr; }
   .stats-strip { grid-template-columns: 1fr 1fr; }
 }
@@ -773,6 +819,7 @@ footer {
       <a href="#about">About</a>
       <a href="#experience">Experience</a>
       <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
       <a href="#contact">Contact</a>
     </div>
     <a href="Sowmiya_Velmurugan_Resume.pdf" download="Sowmiya_Velmurugan_Resume.pdf" class="nav-resume-btn">⬇ Resume</a>
@@ -793,7 +840,7 @@ footer {
     </h1>
     <p class="hero-title">Senior Data Engineer · 6+ Years</p>
     <p class="hero-desc">
-      Building <strong>enterprise-scale data platforms</strong> that turn raw data into insight — across healthcare, insurance, and logistics. Specialist in Databricks, PySpark, AWS, and Lakehouse Architecture.
+      Architecting <strong>enterprise-grade cloud data platforms</strong> on Azure and AWS — across healthcare, insurance, and logistics. Specialist in Databricks, PySpark, Medallion Architecture, and Delta Lake, processing 8+ TB of data daily with HIPAA-compliant, production-grade lakehouse solutions.
     </p>
     <div class="hero-cta">
       <a href="#experience" class="btn-primary">View My Work →</a>
@@ -838,22 +885,23 @@ footer {
     <div class="about-text">
       <p class="section-label">About Me</p>
       <h2 class="section-heading">Turning Data Chaos into Reliable Infrastructure</h2>
-      <p>I'm a Data Engineer with over <strong>6 years of hands-on experience</strong> designing and operating cloud-native data platforms that enterprises depend on — processing terabytes daily without missing a beat.</p>
-      <p>From healthcare claims at <strong>UnitedHealth Group</strong> to logistics at <strong>UPS</strong>, I've built the plumbing that powers mission-critical reporting, population health dashboards, and real-time KPI tracking across industries.</p>
-      <p>My edge is the ability to blend <strong>deep Spark optimization</strong> with thoughtful architecture design — delivering pipelines that are not only fast, but resilient, observable, and maintainable at scale.</p>
+      <p>I'm a Senior Data Engineer with over <strong>6 years of hands-on experience</strong> architecting enterprise-grade cloud data platforms on both <strong>Azure</strong> (ADF, Databricks, ADLS Gen2, Synapse Analytics) and <strong>AWS</strong> (Glue, S3, Redshift, EMR) — processing 8+ TB of data daily without missing a beat.</p>
+      <p>From healthcare claims at <strong>UnitedHealth Group</strong> and <strong>Cigna</strong> to insurance risk data at <strong>Hartford</strong> and logistics at <strong>UPS</strong>, I've built the plumbing that powers mission-critical reporting, population health dashboards, and real-time KPI tracking across industries.</p>
+      <p>My edge is the ability to blend <strong>deep Spark optimization</strong> with thoughtful Medallion/Lakehouse architecture design — delivering HIPAA-compliant pipelines that are not only fast, but resilient, observable, and maintainable at scale.</p>
       <div class="domains-list" style="margin-top:1.5rem;">
         <span class="domain-tag">Healthcare</span>
         <span class="domain-tag">Insurance</span>
         <span class="domain-tag">Logistics</span>
         <span class="domain-tag">Lakehouse</span>
         <span class="domain-tag">Medallion Architecture</span>
+        <span class="domain-tag">HIPAA Compliance</span>
         <span class="domain-tag">MLOps</span>
       </div>
     </div>
 
     <div>
       <div class="about-card">
-        <p style="font-size:0.72rem;color:var(--text-muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1.25rem;font-family:'DM Mono',monospace;">Certification</p>
+        <p style="font-size:0.72rem;color:var(--text-muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1.25rem;font-family:'DM Mono',monospace;">Certifications</p>
         <div class="cert-badge">
           <div class="cert-icon">🏅</div>
           <div class="cert-info">
@@ -861,10 +909,24 @@ footer {
             <div class="cert-sub">Data Engineer Associate</div>
           </div>
         </div>
+        <div class="cert-badge">
+          <div class="cert-icon">☁️</div>
+          <div class="cert-info">
+            <div class="cert-title">Microsoft Azure Data Engineer Associate</div>
+            <div class="cert-sub">LinkedIn Learning · Microsoft</div>
+          </div>
+        </div>
+        <div class="cert-badge" style="margin-bottom:1.5rem;">
+          <div class="cert-icon">🅰️</div>
+          <div class="cert-info">
+            <div class="cert-title">AWS Certified Cloud Practitioner</div>
+            <div class="cert-sub">Coursera · Amazon Web Services</div>
+          </div>
+        </div>
         <p style="font-size:0.72rem;color:var(--text-muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem;font-family:'DM Mono',monospace;">Education</p>
         <div style="padding:1rem;border:1px solid var(--border-soft);border-radius:0.75rem;">
           <p style="font-weight:600;font-family:'Syne',sans-serif;font-size:0.95rem;color:var(--text-primary);">B.E. Computer Science</p>
-          <p style="font-size:0.78rem;color:var(--text-muted);margin-top:0.25rem;">K. Ramakrishnan College of Technology · 2019</p>
+          <p style="font-size:0.78rem;color:var(--text-muted);margin-top:0.25rem;">K. Ramakrishnan College of Technology · Aug 2015 – Apr 2019</p>
         </div>
         <p style="font-size:0.72rem;color:var(--text-muted);letter-spacing:0.1em;text-transform:uppercase;margin-top:1.25rem;margin-bottom:0.75rem;font-family:'DM Mono',monospace;">Location</p>
         <div style="display:flex;align-items:center;gap:0.5rem;color:var(--text-secondary);font-size:0.9rem;">
@@ -888,13 +950,13 @@ footer {
         <div class="exp-role">Data Engineer</div>
         <div class="exp-period">Oct 2025 – Present</div>
       </div>
-      <div class="exp-company"><strong>UnitedHealth Group</strong> · USA</div>
+      <div class="exp-company"><strong>UnitedHealth Group</strong> · USA (Remote)</div>
       <ul class="exp-achievements">
-        <li>Built and tuned PySpark ETL pipelines on Databricks processing <span class="metric-highlight">8+ TB/day</span> of healthcare claims, member, and clinical data feeding enterprise reporting and population health dashboards.</li>
-        <li>Designed a cloud-native ingestion framework on AWS (S3, Glue, Lambda) consolidating <span class="metric-highlight">30+ data sources</span>, cutting manual integration effort by <span class="metric-highlight">60%</span>.</li>
-        <li>Rolled out Medallion Architecture (Bronze/Silver/Gold) on Delta Lake, raising data accuracy to <span class="metric-highlight">99.9%</span> and reducing reconciliation cycles by <span class="metric-highlight">3 hours/day</span>.</li>
-        <li>Reduced pipeline execution time by <span class="metric-highlight">40%</span> through Spark partitioning, broadcast join optimization, and selective caching.</li>
-        <li>Established monitoring covering <span class="metric-highlight">100+ production pipelines</span>, cutting incident response from hours to under <span class="metric-highlight">15 minutes</span>.</li>
+        <li>Architected production-grade PySpark and Scala pipelines on Azure Databricks ingesting, transforming, and serving <span class="metric-highlight">8+ TB/day</span> of healthcare claims, member, and clinical data, powering population health dashboards and regulatory reporting for <span class="metric-highlight">50M+ members</span>.</li>
+        <li>Designed a cloud-native ingestion framework using Azure Data Factory (ADF), ADLS Gen2, Azure Functions, and Azure Event Grid to consolidate <span class="metric-highlight">30+ data sources</span> into a governed Bronze layer, reducing manual integration effort by <span class="metric-highlight">60%</span>.</li>
+        <li>Implemented Medallion Architecture (Bronze/Silver/Gold) via Delta Live Tables (DLT) and Auto Loader, achieving <span class="metric-highlight">99.9% data accuracy</span>, eliminating <span class="metric-highlight">3+ hours/day</span> of reconciliation, and enforcing HIPAA-compliant governance through Unity Catalog with full audit trails.</li>
+        <li>Reduced pipeline execution time by <span class="metric-highlight">40%</span> through Adaptive Query Execution (AQE), Dynamic Partition Pruning, Broadcast Join Optimization, shuffle minimization, and Photon Engine acceleration.</li>
+        <li>Built a data observability framework across <span class="metric-highlight">100+ production pipelines</span> using Great Expectations and Monte Carlo with Azure Monitor alerting, cutting incident response from 2+ hours to under <span class="metric-highlight">15 minutes</span>.</li>
       </ul>
     </div>
 
@@ -904,12 +966,13 @@ footer {
         <div class="exp-role">Data Engineer</div>
         <div class="exp-period">Jul 2023 – Sep 2025</div>
       </div>
-      <div class="exp-company"><strong>CGI</strong> · Client: Cigna Healthcare · India</div>
+      <div class="exp-company"><strong>CGI</strong> · Client: Cigna Healthcare · Chennai, India</div>
       <ul class="exp-achievements">
-        <li>Constructed scalable PySpark pipelines handling <span class="metric-highlight">5+ TB/day</span>, improving analytics data availability by <span class="metric-highlight">40%</span> for BI and reporting teams.</li>
-        <li>Integrated <span class="metric-highlight">20+ data sources</span> via AWS S3 and Databricks Auto Loader, enabling continuous ingestion with zero manual file movement.</li>
-        <li>Tuned Spark cluster configs, cutting average processing time by <span class="metric-highlight">35%</span> and improving resource utilization by <span class="metric-highlight">30%</span> without additional infrastructure spend.</li>
-        <li>Maintained <span class="metric-highlight">99.8% data accuracy</span> across 10+ BI platforms and reduced downstream correction requests by <span class="metric-highlight">45%</span>.</li>
+        <li>Delivered scalable PySpark and Scala pipelines on Azure Databricks processing <span class="metric-highlight">5+ TB/day</span> of claims, provider, and member data (HL7 FHIR, EDI 837/835, JSON, Parquet), improving analytics data availability by <span class="metric-highlight">40%</span> via Delta Lake CDC and schema evolution.</li>
+        <li>Built a multi-layer ADLS Gen2 Data Lake following Bronze-Silver-Gold Medallion Architecture with Unity Catalog governance and full data lineage across <span class="metric-highlight">20+ data sources</span>.</li>
+        <li>Implemented Change Data Capture (CDC) pipelines on Delta Lake using merge operations and Kafka-driven PySpark Structured Streaming, reducing data latency from daily batch to sub-hourly for key operational datasets.</li>
+        <li>Tuned Spark cluster configurations (executor memory, shuffle partitions, dynamic allocation, AQE) and rewrote inefficient query plans, cutting average processing time by <span class="metric-highlight">35%</span> and improving resource utilization by <span class="metric-highlight">30%</span> at zero added cost.</li>
+        <li>Developed dbt transformation models for Silver/Gold data marts (Star/Snowflake Schema), enabling self-service analytics validated by Great Expectations across <span class="metric-highlight">10+ Azure Synapse Analytics</span> platforms.</li>
       </ul>
     </div>
 
@@ -919,12 +982,13 @@ footer {
         <div class="exp-role">Data Engineer</div>
         <div class="exp-period">Aug 2022 – Jun 2023</div>
       </div>
-      <div class="exp-company"><strong>Cognizant</strong> · Client: Hartford Insurance · India</div>
+      <div class="exp-company"><strong>Cognizant</strong> · Client: Hartford Insurance · Chennai, India</div>
       <ul class="exp-achievements">
-        <li>Built distributed PySpark/SQL ETL pipelines processing <span class="metric-highlight">3+ TB</span> of insurance policy and claims data for risk assessment and actuarial reporting.</li>
-        <li>Consolidated <span class="metric-highlight">10+ enterprise source systems</span> into a central data lake, eliminating ad hoc data pulls for reporting teams.</li>
-        <li>Cut data quality incidents by <span class="metric-highlight">30%</span> through automated row-count validation, null-checks, and shared alerting.</li>
-        <li>Improved ETL throughput by <span class="metric-highlight">25%</span> via query plan analysis, predicate pushdown, and elimination of redundant Spark shuffles.</li>
+        <li>Built distributed PySpark and Scala ETL pipelines on Azure Databricks processing <span class="metric-highlight">3+ TB/day</span> of insurance policy, claims, and actuarial data supporting risk assessment and regulatory reporting through a governed Lakehouse Architecture.</li>
+        <li>Designed dimensional data models (Star/Snowflake Schema) with Snowflake Snowpipe ingestion and Streams & Tasks for near-real-time sync, supporting high-performance analytics in Azure Synapse Analytics.</li>
+        <li>Consolidated <span class="metric-highlight">10+ enterprise source systems</span> (Oracle, SQL Server, Salesforce) into a centralized ADLS Gen2 data lake via Azure Data Factory, cutting report generation time by <span class="metric-highlight">30%</span>.</li>
+        <li>Reduced data quality incidents by <span class="metric-highlight">30%</span> through automated row-count validation, null-checks, and referential integrity checks using Great Expectations tied to Azure Monitor alerting.</li>
+        <li>Collaborated cross-functionally with actuarial, compliance, and analytics teams across Agile Scrum sprints, driving stakeholder alignment for regulatory reporting releases.</li>
       </ul>
     </div>
 
@@ -934,12 +998,12 @@ footer {
         <div class="exp-role">Data Engineer</div>
         <div class="exp-period">Jan 2020 – Aug 2022</div>
       </div>
-      <div class="exp-company"><strong>IBM</strong> · Client: UPS Logistics · India</div>
+      <div class="exp-company"><strong>IBM</strong> · Client: UPS Logistics · Bangalore, India</div>
       <ul class="exp-achievements">
-        <li>Wrote Python/SQL ETL workflows processing <span class="metric-highlight">2+ TB/day</span> of logistics data feeding operational dashboards for <span class="metric-highlight">5+ regional teams</span>.</li>
-        <li>Deployed AWS pipelines (S3, Glue, Lambda) automating ingestion for <span class="metric-highlight">15+ data sources</span>, removing <span class="metric-highlight">12+ hours/week</span> of manual processing.</li>
-        <li>Sustained <span class="metric-highlight">99% uptime</span> across 20+ enterprise pipelines, reducing unplanned downtime by <span class="metric-highlight">20%</span>.</li>
-        <li>Enabled real-time shipment visibility with status updates every <span class="metric-highlight">15 minutes</span>, accelerating delivery-rate decision-making for logistics teams.</li>
+        <li>Developed Python, PySpark, and Spark SQL ETL workflows processing <span class="metric-highlight">2+ TB/day</span> of logistics data using AWS Glue, S3, Lambda, EventBridge, and Step Functions, eliminating <span class="metric-highlight">12+ hours/week</span> of manual processing for <span class="metric-highlight">5+ regional teams</span>.</li>
+        <li>Designed and maintained Snowflake data warehouse schemas (Star/Snowflake Schema) with Snowpipe ingestion and Streams & Tasks for <span class="metric-highlight">15-minute</span> shipment status refresh, integrated with Amazon Redshift via optimized AWS Glue jobs.</li>
+        <li>Provisioned reproducible AWS infrastructure using Terraform (IaC), reducing environment setup time from days to under <span class="metric-highlight">2 hours</span>, and championed CI/CD via GitHub Actions sustaining <span class="metric-highlight">99% uptime</span> across 20+ workflows.</li>
+        <li>Authored pipeline architecture documentation, data flow diagrams, and run books across 20+ workflows, cutting new engineer onboarding time by <span class="metric-highlight">2 weeks</span> and establishing reusable DataOps standards.</li>
       </ul>
     </div>
   </div>
@@ -981,19 +1045,29 @@ footer {
       <div class="skill-card-icon">⚡</div>
       <div class="skill-card-title">Big Data & Processing</div>
       <div class="skill-tags">
-        <span class="skill-tag">Apache Spark</span><span class="skill-tag">PySpark</span>
-        <span class="skill-tag">Databricks</span><span class="skill-tag">Delta Lake</span>
+        <span class="skill-tag">Python</span><span class="skill-tag">PySpark</span>
+        <span class="skill-tag">Scala</span><span class="skill-tag">SQL / Spark SQL</span>
         <span class="skill-tag">Delta Live Tables</span><span class="skill-tag">Structured Streaming</span>
       </div>
     </div>
     <div class="skill-card reveal">
       <div class="skill-card-icon">☁️</div>
-      <div class="skill-card-title">Cloud Platforms</div>
+      <div class="skill-card-title">Cloud Platforms — Azure</div>
       <div class="skill-tags">
-        <span class="skill-tag">AWS S3</span><span class="skill-tag">AWS Glue</span>
-        <span class="skill-tag">Lambda</span><span class="skill-tag">Redshift</span>
-        <span class="skill-tag">Azure Databricks</span><span class="skill-tag">Azure Data Factory</span>
-        <span class="skill-tag">ADLS Gen2</span>
+        <span class="skill-tag">Azure Data Factory</span><span class="skill-tag">Azure Databricks</span>
+        <span class="skill-tag">ADLS Gen2</span><span class="skill-tag">Azure Synapse Analytics</span>
+        <span class="skill-tag">Azure Functions</span><span class="skill-tag">Azure Event Grid</span>
+        <span class="skill-tag">Azure Key Vault</span><span class="skill-tag">Azure Monitor</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-card-icon">🟧</div>
+      <div class="skill-card-title">Cloud Platforms — AWS</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Amazon S3</span><span class="skill-tag">AWS Glue</span>
+        <span class="skill-tag">AWS EMR</span><span class="skill-tag">Amazon Redshift</span>
+        <span class="skill-tag">Amazon Athena</span><span class="skill-tag">AWS Lambda</span>
+        <span class="skill-tag">Step Functions</span><span class="skill-tag">EventBridge</span>
       </div>
     </div>
     <div class="skill-card reveal">
@@ -1001,74 +1075,143 @@ footer {
       <div class="skill-card-title">Data Architecture</div>
       <div class="skill-tags">
         <span class="skill-tag">Medallion Architecture</span><span class="skill-tag">Lakehouse</span>
-        <span class="skill-tag">Delta Tables</span><span class="skill-tag">Unity Catalog</span>
-        <span class="skill-tag">Auto Loader</span><span class="skill-tag">Data Lineage</span>
+        <span class="skill-tag">Delta Lake</span><span class="skill-tag">Unity Catalog</span>
+        <span class="skill-tag">Auto Loader</span><span class="skill-tag">CDC Pipelines</span>
+        <span class="skill-tag">Data Mesh</span><span class="skill-tag">DataOps</span>
       </div>
     </div>
     <div class="skill-card reveal">
       <div class="skill-card-icon">🔧</div>
-      <div class="skill-card-title">ETL & Integration</div>
+      <div class="skill-card-title">ETL / ELT & Integration</div>
       <div class="skill-tags">
-        <span class="skill-tag">Azure Data Factory</span><span class="skill-tag">AWS Glue</span>
         <span class="skill-tag">dbt</span><span class="skill-tag">Fivetran</span>
         <span class="skill-tag">Airbyte</span><span class="skill-tag">Informatica IICS</span>
-        <span class="skill-tag">Alteryx</span>
+        <span class="skill-tag">Apache Airflow</span><span class="skill-tag">Apache Kafka</span>
+        <span class="skill-tag">Event-Driven Architecture</span>
       </div>
     </div>
     <div class="skill-card reveal">
       <div class="skill-card-icon">🗄️</div>
-      <div class="skill-card-title">Data Warehousing</div>
+      <div class="skill-card-title">Data Warehousing & Modeling</div>
       <div class="skill-tags">
         <span class="skill-tag">Snowflake</span><span class="skill-tag">Amazon Redshift</span>
-        <span class="skill-tag">Azure Synapse</span><span class="skill-tag">PostgreSQL</span>
-        <span class="skill-tag">SQL Server</span><span class="skill-tag">Dimensional Modeling</span>
+        <span class="skill-tag">Azure Synapse</span><span class="skill-tag">Star / Snowflake Schema</span>
+        <span class="skill-tag">Dimensional Modeling</span><span class="skill-tag">Parquet / Iceberg / Avro</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-card-icon">🚀</div>
+      <div class="skill-card-title">Spark Optimization</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Adaptive Query Execution</span><span class="skill-tag">Dynamic Partition Pruning</span>
+        <span class="skill-tag">Broadcast Join Optimization</span><span class="skill-tag">Predicate Pushdown</span>
+        <span class="skill-tag">Shuffle Tuning</span><span class="skill-tag">Photon Engine</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-card-icon">🛡️</div>
+      <div class="skill-card-title">Data Quality & Governance</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Great Expectations</span><span class="skill-tag">Monte Carlo</span>
+        <span class="skill-tag">Data Lineage</span><span class="skill-tag">Data Contracts</span>
+        <span class="skill-tag">HIPAA Compliance</span><span class="skill-tag">Audit Trails</span>
+        <span class="skill-tag">MLflow</span><span class="skill-tag">Feature Store</span>
       </div>
     </div>
     <div class="skill-card reveal">
       <div class="skill-card-icon">🔄</div>
-      <div class="skill-card-title">Orchestration & DevOps</div>
+      <div class="skill-card-title">DevOps & Leadership</div>
       <div class="skill-tags">
-        <span class="skill-tag">Apache Airflow</span><span class="skill-tag">Apache Kafka</span>
-        <span class="skill-tag">Kafka Connect</span><span class="skill-tag">Docker</span>
-        <span class="skill-tag">Terraform</span><span class="skill-tag">CI/CD</span>
-        <span class="skill-tag">Git</span>
+        <span class="skill-tag">Terraform</span><span class="skill-tag">Docker</span>
+        <span class="skill-tag">Kubernetes</span><span class="skill-tag">CI/CD</span>
+        <span class="skill-tag">GitHub Actions</span><span class="skill-tag">Stakeholder Management</span>
+        <span class="skill-tag">Agile Scrum</span><span class="skill-tag">Mentoring</span>
       </div>
     </div>
   </div>
 </section>
 
+<!-- ==================== PROJECTS ==================== -->
+<section id="projects">
+  <p class="section-label">Selected Work</p>
+  <h2 class="section-heading">Projects</h2>
+  <p class="section-subhead">Independent and applied engineering work beyond day-to-day client delivery.</p>
+  <div class="projects-grid">
+    <div class="project-card reveal">
+      <div class="project-title">Enterprise Healthcare Claims Lakehouse</div>
+      <div class="project-period">2024 – 2025</div>
+      <div class="project-stack">
+        <span class="tech-pill tp-teal">PySpark</span>
+        <span class="tech-pill tp-teal">Delta Live Tables</span>
+        <span class="tech-pill tp-gold">Unity Catalog</span>
+        <span class="tech-pill tp-white">ADF</span>
+        <span class="tech-pill tp-white">Great Expectations</span>
+        <span class="tech-pill tp-white">Kafka</span>
+      </div>
+      <ul class="project-list">
+        <li>Architected a Databricks Medallion (Bronze/Silver/Gold) Lakehouse processing <span class="metric-highlight">50M+ healthcare claims/month</span> using Auto Loader, ADF, Delta Lake CDC, Spark SQL, and Unity Catalog, delivering HIPAA-compliant pipelines with <span class="metric-highlight">99.8% data quality</span>.</li>
+        <li>Built Kafka-based PySpark Structured Streaming pipelines with Great Expectations, Azure Monitor, and Monte Carlo for automated validation, SLA monitoring, and sub-hourly CDC, reducing data incident response time by <span class="metric-highlight">75%</span>.</li>
+      </ul>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-title">DataOps Quality & Observability Platform</div>
+      <div class="project-period">2023 – 2024</div>
+      <div class="project-stack">
+        <span class="tech-pill tp-teal">Python</span>
+        <span class="tech-pill tp-teal">SQL</span>
+        <span class="tech-pill tp-gold">Great Expectations</span>
+        <span class="tech-pill tp-white">Apache Airflow</span>
+        <span class="tech-pill tp-white">Docker</span>
+        <span class="tech-pill tp-white">GitHub Actions</span>
+      </div>
+      <ul class="project-list">
+        <li>Developed an automated DataOps quality framework using Python, SQL, Great Expectations, and Airflow to enforce schema validation, reconciliation, referential integrity, and data contracts across <span class="metric-highlight">15+ production pipelines</span>.</li>
+        <li>Containerized and deployed the framework with Docker and GitHub Actions CI/CD, reducing manual QA effort by <span class="metric-highlight">60%</span> while standardizing version-controlled data quality across dev, staging, and production.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
 <!-- ==================== TECH CLOUD ==================== -->
-<section id="tech" style="padding-top:0;">
+<section id="tech">
   <p class="section-label">Tech Stack</p>
   <h2 class="section-heading">Tools & Technologies</h2>
   <div class="tech-cloud">
     <span class="tech-pill tp-teal">🟢 PySpark</span>
+    <span class="tech-pill tp-teal">🟢 Scala</span>
     <span class="tech-pill tp-teal">🟢 Databricks</span>
     <span class="tech-pill tp-teal">🟢 Delta Lake</span>
     <span class="tech-pill tp-teal">🟢 Delta Live Tables</span>
+    <span class="tech-pill tp-coral">◈ Azure Data Factory</span>
+    <span class="tech-pill tp-coral">◈ Azure Databricks</span>
+    <span class="tech-pill tp-coral">◈ ADLS Gen2</span>
+    <span class="tech-pill tp-coral">◈ Azure Synapse</span>
+    <span class="tech-pill tp-coral">◈ Azure Functions</span>
     <span class="tech-pill tp-gold">⭐ AWS S3</span>
     <span class="tech-pill tp-gold">⭐ AWS Glue</span>
+    <span class="tech-pill tp-gold">⭐ AWS EMR</span>
     <span class="tech-pill tp-gold">⭐ AWS Lambda</span>
     <span class="tech-pill tp-gold">⭐ Amazon Redshift</span>
-    <span class="tech-pill tp-coral">◈ Azure Databricks</span>
-    <span class="tech-pill tp-coral">◈ Azure Data Factory</span>
-    <span class="tech-pill tp-coral">◈ Azure Synapse</span>
+    <span class="tech-pill tp-gold">⭐ Amazon Athena</span>
     <span class="tech-pill tp-teal">🟢 Apache Kafka</span>
     <span class="tech-pill tp-teal">🟢 Apache Airflow</span>
     <span class="tech-pill tp-white">· Snowflake</span>
     <span class="tech-pill tp-white">· dbt</span>
     <span class="tech-pill tp-white">· Terraform</span>
     <span class="tech-pill tp-white">· Docker</span>
+    <span class="tech-pill tp-white">· Kubernetes</span>
     <span class="tech-pill tp-white">· Fivetran</span>
     <span class="tech-pill tp-white">· Airbyte</span>
+    <span class="tech-pill tp-white">· Informatica IICS</span>
     <span class="tech-pill tp-white">· MLflow</span>
+    <span class="tech-pill tp-white">· Great Expectations</span>
+    <span class="tech-pill tp-white">· Monte Carlo</span>
     <span class="tech-pill tp-white">· Python</span>
     <span class="tech-pill tp-white">· SQL</span>
     <span class="tech-pill tp-white">· Spark SQL</span>
-    <span class="tech-pill tp-white">· Shell Scripting</span>
     <span class="tech-pill tp-white">· Unity Catalog</span>
-    <span class="tech-pill tp-white">· Parquet / Avro / JSON</span>
-    <span class="tech-pill tp-white">· GitHub / CI-CD</span>
+    <span class="tech-pill tp-white">· Parquet / Avro / Iceberg</span>
+    <span class="tech-pill tp-white">· GitHub Actions / CI-CD</span>
   </div>
 </section>
 
